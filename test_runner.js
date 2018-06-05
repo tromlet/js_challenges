@@ -23,7 +23,7 @@ exports.test = (testFunction, testCases) => {
   } else {
     let message = "";
     results.forEach((result) => {
-      message += `${result.passed ? passmoji : failmoji} parameters: ${result.testCase.input} got: ${result.result}, expected: ${result.testCase.output}\n`;
+      message += `${result.passed ? passmoji : failmoji} parameters: ${JSON.stringify(result.testCase.input)} got: ${result.result}, expected: ${result.testCase.output}\n`;
     });
     console.log(message);
   }

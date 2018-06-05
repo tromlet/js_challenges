@@ -1,3 +1,7 @@
+//return str.match(/x[^y]*$/) == null;
+
+
+
 const tester = require('./test_runner.js');
 
 /*
@@ -12,7 +16,7 @@ returns boolean
 ================================================================================*/
 
 function xyBalance(str) {
-  return false;
+  return str.match(/x[^y]*$/) === null;
 }
 
 tester.test(xyBalance, [
@@ -50,8 +54,45 @@ returns number[]
 ================================================================================*/
 
 function notAlone(nums, val) {
-  // YOUR CODE HERE
+  return nums.map((num, i) => {
+    // IS num ALONE?
+    if(num === val &&           //Is num the value we're looking for
+       i !== 0 &&               //Is num not at the beginning
+       i !== nums.length - 1 && //Is num not at the end
+       nums[i-1] !== val &&     //Is the left neighbor 'not' val
+       nums[i+1] !== val        //Is the right neighbor 'not' val
+    ) {
+      // console.log(`The number ${num} at position ${i} IS alone`);
+      return Math.max(nums[i-1], nums[i+1]); // max is the bigger neighbor
+    } else {
+      //IF num is NOT alone, just push it into the new array
+      return num;
+    }
+  });
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // return nums.map((num, i) => {
+  //   // Check if alone
+  //   if(num === val && i !== 0 && i !== nums.length - 1 && nums[i-1] !== num && nums[i+1] !== num) {
+  //     return Math.max(nums[i-1], nums[i+1]);
+  //   } else {
+  //     return num;
+  //   }
+  // });
+// }
 
 tester.test(notAlone, [
   {input: [[1, 2, 3], 2], output: [1, 3, 3]},
@@ -80,7 +121,13 @@ returns string
 ================================================================================*/
 
 function oneTwo(str) {
-  // YOUR CODE HERE
+  let newStr = "";
+
+  for(let i = 0; i < str.length - 2; i += 3) {
+    newStr += str[i + 1] + str[i + 2] + str[i];
+  }
+
+  return newStr;
 }
 
 tester.test(oneTwo, [
@@ -113,7 +160,19 @@ returns boolean
 ================================================================================*/
 
 function sameStarChar(str) {
-  // YOUR CODE HERE
+  for(let i = 0; i < str.length; i++) {
+    // find the stars
+    if(str[i] === "*") {
+      // Make sure the star IS NOT on the begginning or end of the str
+      if(i !== 0 && i !== str.length - 1) {
+        // If the characters before and after the star are different, return false
+        if(str[i-1] !== str[i+1]) {
+          return false;
+        }
+      }
+    }
+  }
+  return true;
 }
 
 tester.test(sameStarChar, [
@@ -147,7 +206,30 @@ returns number
 ================================================================================*/
 
 function count11(str) {
-  // YOUR CODE HERE
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // if(str.length < 2) return 0;
+  // if(str[0] === '1' && str[1] === '1') {
+  //   return 1 + count11(str.slice(2));
+  // } else {
+  //   return count11(str.slice(1));
+  // }
 }
 
 tester.test(count11, [
@@ -175,8 +257,32 @@ returns string
 ================================================================================*/
 
 function stringClean(str) {
-  // YOUR CODE HERE
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // if(str.length < 2) return str;
+  // if(str[0] === str[1]) return stringClean(str.slice(1));
+  // return str[0] + stringClean(str.slice(1));
 }
+
+console.log(stringClean("yyzzza"));
 
 tester.test(stringClean, [
   {input: ["yyzzza"], output: "yza"},
