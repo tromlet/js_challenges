@@ -11,8 +11,24 @@ Has 1 parameters (n: number)
 returns boolean
 ================================================================================*/
 
+// function hasOne(n) {
+//   let numStr = n.toString();
+//   for (let i = 0; i < numStr.length; i++) {
+//     if (numStr[i] === "1") return true;
+//   }
+//   return false;
+// }
+
 function hasOne(n) {
-  // YOUR CODE HERE
+  if (n < 10 && n !== 1) {
+    return false;
+  } else if (n === 1) {
+    return true;
+  } else if (n % 10 === 1) {
+    return true;
+  } else {
+    return hasOne(Math.floor(n / 10));
+  }
 }
 
 tester.test(hasOne, [
@@ -46,8 +62,19 @@ returns boolean
 ================================================================================*/
 
 function dividesSelf(n) {
-  // YOUR CODE HERE
+  let numStr = n.toString();
+  for (let i = 0; i < numStr.length; i++) {
+    if (n % Number(numStr[i]) !== 0) return false;
+  }
+  return true;
 }
+
+// function dividesSelf(n) {
+//   let input = n;
+//   let digit = n % 10;
+//   if (n % digit === 0)
+//   dividesSelf(Math.floor(n / 10));
+// }
 
 tester.test(dividesSelf, [
   {input: [128], output: true},
@@ -76,8 +103,15 @@ Has 2 parameters (nums: number[], count: number)
 returns number[]
 ================================================================================*/
 
+// Good case for a filter!
 function copyEvens(nums, count) {
-  // YOUR CODE HERE
+  let returnArr = [];
+  let increment = 0;
+  while (returnArr.length < count) {
+    nums[increment] % 2 === 0 ? returnArr.push(nums[increment]) : null ;
+    increment++;
+  }
+  return returnArr;
 }
 
 tester.test(copyEvens, [
@@ -111,8 +145,16 @@ Has 2 parameters (nums: number[], count: number)
 returns number[]
 ================================================================================*/
 
+function isEndy(n) {
+  return (n >= 0 && n <= 10) || (n >= 90 && n <= 100);
+}
+
 function copyEndy(nums, count) {
-  // YOUR CODE HERE
+  let returnArr = [];
+  nums.forEach(num => {
+    if (isEndy(num)) returnArr.push(num);
+  });
+  return returnArr.slice(0, count);
 }
 
 tester.test(copyEndy, [
@@ -146,7 +188,13 @@ returns number
 ================================================================================*/
 
 function matchUp(a, b) {
-  // YOUR CODE HERE
+  let count = 0;
+  for (let i = 0; i < a.length; i++) {
+    if (a[i][0] !== undefined && b[i][0] !== undefined) {
+      a[i][0] === b[i][0] ? count++ : null ;
+    }
+  }
+  return count;
 }
 
 tester.test(matchUp, [
@@ -181,7 +229,20 @@ returns number
 ================================================================================*/
 
 function scoreUp(key, answers) {
-  // YOUR CODE HERE
+  let score = 0;
+  for (let i = 0; i < key.length; i++) {
+    switch (answers[i]) {
+      case "?":
+        score += 0;
+        break;
+      case key[i]:
+        score += 4;
+        break;
+      default:
+        score -= 1;
+    }
+  }
+  return score;
 }
 
 tester.test(scoreUp, [
@@ -215,7 +276,11 @@ returns string[]
 ================================================================================*/
 
 function wordsWithout(words, target) {
-  // YOUR CODE HERE
+  let returnArr = [];
+  words.forEach(word => {
+    word === target ? null : returnArr.push(word) ;
+  });
+  return returnArr;
 }
 
 tester.test(wordsWithout, [

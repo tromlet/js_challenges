@@ -13,7 +13,18 @@ returns boolean
 ================================================================================*/
 
 function scoresIncreasing(scores) {
-  // YOUR CODE HERE
+  let a = 0;
+  let b = 0;
+  let value = false;
+  for(let i = 0; i < scores.length - 1; i++) {
+    a = scores[i];
+    b = scores[i + 1];
+    b >= a ? value = true : value = false;
+    if (!value) {
+      return value;
+    }
+  }
+  return value;
 }
 
 tester.test(scoresIncreasing, [
@@ -38,7 +49,18 @@ returns boolean
 ================================================================================*/
 
 function scores100(scores) {
-  // YOUR CODE HERE
+  let a = 0;
+  let b = 0;
+  let value = false;
+  for(let i = 0; i < scores.length - 1; i++) {
+    a = scores[i];
+    b = scores[i + 1];
+    b === 100 && a === 100 ? value = true : value = false;
+    if (value) {
+      return value;
+    }
+  }
+  return value;
 }
 
 tester.test(scores100, [
@@ -64,7 +86,18 @@ returns boolean
 ================================================================================*/
 
 function scoresClump(scores) {
-  // YOUR CODE HERE
+  let a = 0;
+  let b = 0;
+  let c = 0;
+  for(let i = 0; i < scores.length - 2; i++) {
+    a = scores[i];
+    b = scores[i + 1];
+    c = scores[i + 2];
+    if (Math.max(a, b, c) - Math.min(a, b, c) <= 2 ) {
+      return true;
+    }
+  }
+  return false ;
 }
 
 tester.test(scoresClump, [
@@ -100,7 +133,20 @@ returns number
 ================================================================================*/
 
 function scoresAverage(scores) {
-  // YOUR CODE HERE
+  let scoresCopy = scores.slice(0);
+  let scoresFirstHalf = scoresCopy.slice(0, scoresCopy.length / 2);
+  let scoresSecondHalf = scoresCopy.slice(scoresCopy.length / 2);
+  let firstAvg = 0;
+  let secondAvg = 0;
+  for(let i = 0; i < scoresFirstHalf.length; i++) {
+    firstAvg += scoresFirstHalf[i];
+  }
+  for(let i = 0; i < scoresSecondHalf.length; i++) {
+    secondAvg += scoresSecondHalf[i];
+  }
+  firstAvg = firstAvg / (scoresFirstHalf.length);
+  secondAvg = secondAvg / (scoresSecondHalf.length);
+  return firstAvg >= secondAvg ? firstAvg : secondAvg ;
 }
 
 tester.test(scoresAverage, [
@@ -126,7 +172,11 @@ returns number
 ================================================================================*/
 
 function wordsCount(words, len) {
-  // YOUR CODE HERE
+  let count = 0;
+  words.forEach(function (word){
+    word.length === len ? count++ : null ;
+  });
+  return count;
 }
 
 tester.test(wordsCount, [
@@ -152,7 +202,11 @@ returns string[]
 ================================================================================*/
 
 function wordsFront(words, n) {
-  // YOUR CODE HERE
+  let wordReturn = [];
+  for(let i = 0; i < n; i++) {
+    wordReturn.push(words[i]);
+  }
+  return wordReturn;
 }
 
 tester.test(wordsFront, [
@@ -179,8 +233,13 @@ Has 2 parameters (words: string[], len: number)
 returns List
 ================================================================================*/
 
+// Good case for a filter!
 function wordsWithoutList(words, len) {
-  // YOUR CODE HERE
+  let wordReturn = [];
+  words.forEach(word => {
+    word.length === len ? null : wordReturn.push(word);
+  });
+  return wordReturn;
 }
 
 tester.test(wordsWithoutList, [

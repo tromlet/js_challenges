@@ -17,7 +17,38 @@ returns number
 ================================================================================*/
 
 function scoresSpecial(a, b) {
-  // YOUR CODE HERE
+  let c = findSpecial(a);
+  let d = findSpecial(b);
+  let e = a[c];
+  let f = b[d];
+  if (a[c] === undefined) e = 0 ;
+  if (b[d] === undefined) f = 0 ;
+  return e + f;
+}
+
+function findSpecial(scores) {
+  let largestSpecial = 0;
+  let largestIndex = 0;
+  let specials = [];
+  for (let i = 0; i < scores.length; i++) {
+    if (scores[i] % 10 === 0) specials.push(scores[i]);
+  }
+  if (specials.length === 0) {
+    largestIndex = null;
+  } else if (specials.length === 1) {
+    largestSpecial = specials[0];
+    largestIndex = scores.indexOf(largestSpecial);
+  } else {
+    for (let i = 0; i < specials.length - 1; i++) {
+      if (specials[i] > specials[i + 1]) {
+        largestSpecial = specials[i];
+      } else {
+        largestSpecial = specials[i + 1];
+      }
+    }
+    largestIndex = scores.indexOf(largestSpecial);
+  }
+  return largestIndex;
 }
 
 tester.test(scoresSpecial, [
@@ -51,7 +82,15 @@ returns number
 ================================================================================*/
 
 function sumHeights(heights, start, end) {
-  // YOUR CODE HERE
+  let change = 0;
+  for (let i = start; i < end; i++) {
+    if (heights[i] > heights[i + 1]) {
+      change += heights[i] - heights[i + 1];
+    } else {
+      change += heights[i + 1] - heights[i]
+    }
+  }
+  return change;
 }
 
 tester.test(sumHeights, [
@@ -88,7 +127,15 @@ returns number
 ================================================================================*/
 
 function sumHeights2(heights, start, end) {
-  // YOUR CODE HERE
+  let change = 0;
+  for (let i = start; i < end; i++) {
+    if (heights[i] > heights[i + 1]) {
+      change += heights[i] - heights[i + 1];
+    } else {
+      change += 2 * (heights[i + 1] - heights[i]);
+    }
+  }
+  return change;
 }
 
 tester.test(sumHeights2, [
@@ -124,7 +171,15 @@ returns number
 ================================================================================*/
 
 function bigHeights(heights, start, end) {
-  // YOUR CODE HERE
+  let bigSteps = 0;
+  for (let i = start; i < end; i++) {
+    if (heights[i] > heights[i + 1]) {
+      heights[i] - heights[i + 1] < 5 ? null : bigSteps++ ;
+    } else {
+      heights[i + 1] - heights[i] < 5 ? null : bigSteps++ ;
+    }
+  }
+  return bigSteps;
 }
 
 tester.test(bigHeights, [
@@ -166,7 +221,19 @@ returns number
 ================================================================================*/
 
 function userCompare(aName, aId, bName, bId) {
-  // YOUR CODE HERE
+  if (aName.localeCompare(bName) > 0) {
+    return 1;
+  } else if (aName.localeCompare(bName) === 0) {
+    if (aId > bId) {
+      return 1;
+    } else if (aId < bId) {
+      return -1;
+    } else {
+      return 0;
+    }
+  } else if (aName.localeCompare(bName) < 0) {
+    return -1;
+  }
 }
 
 tester.test(userCompare, [
@@ -199,7 +266,11 @@ returns string[]
 ================================================================================*/
 
 function mergeTwo(a, b, n) {
-  // YOUR CODE HERE
+  let arr = a.concat(b).sort();
+  for (let i = 0; i < arr.length - 1; i++) {
+    if (arr[i].localeCompare(arr[i + 1]) === 0) arr.splice(i, 1);
+  }
+  return arr.splice(0, n);
 }
 
 tester.test(mergeTwo, [
@@ -229,7 +300,22 @@ returns number
 ================================================================================*/
 
 function commonTwo(a, b) {
-  // YOUR CODE HERE
+  let count = 0;
+  let uniq = [];
+  for (let i = 0; i < Math.min(a.length, b.length); i++) {
+    if (a.length < b.length) {
+      if (b.includes(a[i]) && !(uniq.includes(a[i]))) {
+        count++;
+        uniq.push(a[i]);
+      }
+    } else {
+      if (a.includes(b[i]) && !(uniq.includes(b[i]))) {
+        count++;
+        uniq.push(b[i]);
+      }
+    }
+  }
+  return count;
 }
 
 tester.test(commonTwo, [
