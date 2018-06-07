@@ -81,16 +81,24 @@ Has 3 parameters (heights: number[], start: number, end: number)
 returns number
 ================================================================================*/
 
+// function sumHeights(heights, start, end) {
+//   let change = 0;
+//   for (let i = start; i < end; i++) {
+//     if (heights[i] > heights[i + 1]) {
+//       change += heights[i] - heights[i + 1];
+//     } else {
+//       change += heights[i + 1] - heights[i]
+//     }
+//   }
+//   return change;
+// }
+
 function sumHeights(heights, start, end) {
-  let change = 0;
-  for (let i = start; i < end; i++) {
-    if (heights[i] > heights[i + 1]) {
-      change += heights[i] - heights[i + 1];
-    } else {
-      change += heights[i + 1] - heights[i]
-    }
+  let counter = 0;
+  for(let i = start; i < end; i++){
+    counter += Math.abs(heights[i] - heights[i + 1])
   }
-  return change;
+  return counter;
 }
 
 tester.test(sumHeights, [
@@ -126,16 +134,29 @@ Has 3 parameters (heights: number[], start: number, end: number)
 returns number
 ================================================================================*/
 
+// function sumHeights2(heights, start, end) {
+//   let change = 0;
+//   for (let i = start; i < end; i++) {
+//     if (heights[i] > heights[i + 1]) {
+//       change += heights[i] - heights[i + 1];
+//     } else {
+//       change += 2 * (heights[i + 1] - heights[i]);
+//     }
+//   }
+//   return change;
+// }
+
 function sumHeights2(heights, start, end) {
-  let change = 0;
-  for (let i = start; i < end; i++) {
-    if (heights[i] > heights[i + 1]) {
-      change += heights[i] - heights[i + 1];
-    } else {
-      change += 2 * (heights[i + 1] - heights[i]);
+  let counter = 0;
+  for(let i = start; i < end; i++){
+    if(heights[i] >= heights[i + 1]){
+      counter += Math.abs(heights[i] - heights[i+1]);
+    }else if(heights[i] < heights[i + 1]){
+      counter += 2 * Math.abs(heights[i] - heights[i+1]);
     }
+    // return counter;
   }
-  return change;
+  return counter;
 }
 
 tester.test(sumHeights2, [
