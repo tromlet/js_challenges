@@ -81,25 +81,25 @@ Has 3 parameters (heights: number[], start: number, end: number)
 returns number
 ================================================================================*/
 
-// function sumHeights(heights, start, end) {
-//   let change = 0;
-//   for (let i = start; i < end; i++) {
-//     if (heights[i] > heights[i + 1]) {
-//       change += heights[i] - heights[i + 1];
-//     } else {
-//       change += heights[i + 1] - heights[i]
-//     }
-//   }
-//   return change;
-// }
-
 function sumHeights(heights, start, end) {
-  let counter = 0;
-  for(let i = start; i < end; i++){
-    counter += Math.abs(heights[i] - heights[i + 1])
+  let change = 0;
+  for (let i = start; i < end; i++) {
+    if (heights[i] > heights[i + 1]) {
+      change += heights[i] - heights[i + 1];
+    } else {
+      change += heights[i + 1] - heights[i]
+    }
   }
-  return counter;
+  return change;
 }
+
+// function sumHeights(heights, start, end) {
+//   let counter = 0;
+//   for(let i = start; i < end; i++){
+//     counter += Math.abs(heights[i] - heights[i + 1])
+//   }
+//   return counter;
+// }
 
 tester.test(sumHeights, [
   {input: [[5, 3, 6, 7, 2], 2, 4], output: 6},
@@ -134,30 +134,30 @@ Has 3 parameters (heights: number[], start: number, end: number)
 returns number
 ================================================================================*/
 
-// function sumHeights2(heights, start, end) {
-//   let change = 0;
-//   for (let i = start; i < end; i++) {
-//     if (heights[i] > heights[i + 1]) {
-//       change += heights[i] - heights[i + 1];
-//     } else {
-//       change += 2 * (heights[i + 1] - heights[i]);
-//     }
-//   }
-//   return change;
-// }
-
 function sumHeights2(heights, start, end) {
-  let counter = 0;
-  for(let i = start; i < end; i++){
-    if(heights[i] >= heights[i + 1]){
-      counter += Math.abs(heights[i] - heights[i+1]);
-    }else if(heights[i] < heights[i + 1]){
-      counter += 2 * Math.abs(heights[i] - heights[i+1]);
+  let change = 0;
+  for (let i = start; i < end; i++) {
+    if (heights[i] > heights[i + 1]) {
+      change += heights[i] - heights[i + 1];
+    } else {
+      change += 2 * (heights[i + 1] - heights[i]);
     }
-    // return counter;
   }
-  return counter;
+  return change;
 }
+
+// function sumHeights2(heights, start, end) {
+//   let counter = 0;
+//   for(let i = start; i < end; i++){
+//     if(heights[i] >= heights[i + 1]){
+//       counter += Math.abs(heights[i] - heights[i+1]);
+//     }else if(heights[i] < heights[i + 1]){
+//       counter += 2 * Math.abs(heights[i] - heights[i+1]);
+//     }
+//     // return counter;
+//   }
+//   return counter;
+// }
 
 tester.test(sumHeights2, [
   {input: [[5, 3, 6, 7, 2], 2, 4], output: 7},
@@ -195,9 +195,9 @@ function bigHeights(heights, start, end) {
   let bigSteps = 0;
   for (let i = start; i < end; i++) {
     if (heights[i] > heights[i + 1]) {
-      heights[i] - heights[i + 1] < 5 ? null : bigSteps++ ;
+      if (!(heights[i] - heights[i + 1] < 5)) bigSteps++;
     } else {
-      heights[i + 1] - heights[i] < 5 ? null : bigSteps++ ;
+      if (!(heights[i + 1] - heights[i] < 5)) bigSteps++;
     }
   }
   return bigSteps;
